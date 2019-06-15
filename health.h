@@ -13,7 +13,7 @@ public:
 private:
     int health = 0;
 signals:
-    void zero();
+    void zero(QKeyEvent *parent = nullptr);
 };
 
 #endif // HEALTH_H

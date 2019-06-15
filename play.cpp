@@ -1,16 +1,16 @@
 #include <QApplication>
 #include <QTextCodec>
+#include "play.h"
 #include "game.h"
+#include "play.h"
 
-static Game* game;
-
-int main(int argc, char *argv[]){
-    QApplication a(argc, argv);
-
+Play::Play(){
     QTextCodec *codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(codec);
-
     game = new Game();
+    connect(game, &Game::restart, this, &Play::restart);
+}
 
-    return a.exec();
+void Play::restart(){
+    game = new Game();
 }

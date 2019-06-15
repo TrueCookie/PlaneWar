@@ -6,6 +6,9 @@
 
 class Enemy : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
+private:
+    const int weight = 184;
+    const int height = 185;
 public:
     Enemy(QGraphicsItem *parent = nullptr);
 public slots:

@@ -7,6 +7,9 @@
 
 class Player : public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
+private:
+    const int weight = 185;
+    const int height = 184;
 public:
     Player(QGraphicsItem *parent=nullptr);
     void keyPressEvent(QKeyEvent *event);

@@ -4,55 +4,44 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
-#include "background.h"
 #include <QTimer>
 #include <QMediaPlayer>
 #include <QWidget>
 #include <QBrush>
 #include <QImage>
+#include <QKeyEvent>
 
 
 Game::Game(QWidget *parent){
+    //restart();
     scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,800,600);
+    scene->setSceneRect(0,0,screenWidth,screenHeight);
 
     //setBackgroundBrush(QBrush(QImage(":/new/prefix/Sprites/space.png")));
-    Background *background = new Background();
-    scene->addItem(background);
 
-    //add a view
-    QGraphicsView *view = new QGraphicsView(scene);
+    view = new QGraphicsView(scene);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setFixedSize(800, 600);
     view->setBackgroundBrush(QBrush(QImage(":/new/prefix/Sprites/space.png")));
     view->show();
-    //create an item to put into the scene
+
     player = new Player();
-    //setPixmap(QPixmap(":/sprites/Sprites/Player.png"));
-
     player->setPos(view->width()/2, view->height()-185);
-
-    //add the item to the scene
     scene->addItem(player);
-
-    //make rect focusible
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
 
-    //create the score/health
     score = new Score();
     health = new Health();
     health->setPos(health->x(),health->y()+25);
     scene->addItem(score);
     scene->addItem(health);
 
-    //spawn enemies
     QTimer* timer = new QTimer();
     QObject::connect(timer, &QTimer::timeout, this, &Game::spawn);
     timer->start(2000);
 
-    //play background music
     QMediaPlayer *music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/sounds/BGMusic.mp3"));
     music->play();
@@ -67,13 +56,16 @@ void Game::spawn(){
     scene->addItem(enemy);
 }
 
-void Game::over(){
-    qDebug() << "GAMEOVER";
+void Game::over(QKeyEvent *event){
     QGraphicsTextItem* text = new QGraphicsTextItem("GAME OVER");
     text->setScale(10.0);
-    text->setPos(512,scene->height()/3);
+    text->setPos(64,scene->height()/3);
     scene->addItem(text);
-    score->setPos(scene->width()/3,text->pos().y()+512);
+    score->setPos(scene->width()/3,text->pos().y()+128);
     score->setScale(4.0);
     delete player;
+    delete health;
+    if(event->key() == Qt::Key_Enter){
+        emit restart();
+    }
 }

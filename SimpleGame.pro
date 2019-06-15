@@ -27,20 +27,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-    background.cpp \
         main.cpp \
     bullet.cpp \
     enemy.cpp \
     game.cpp \
+    play.cpp \
     score.cpp \
     player.cpp \
     health.cpp
 
 HEADERS += \
-    background.h \
     bullet.h \
     enemy.h \
     game.h \
+    play.h \
     score.h \
     player.h \
     health.h
