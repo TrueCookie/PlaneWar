@@ -8,11 +8,13 @@
         <file>Sprites/Enemy.png</file>
         <file>Sprites/Player.png</file>
         <file>Sprites/space.png</file>
+        <file>Sprites/turtleSL.png</file>
     </qresource>
     <qresource prefix="/images">
         <file>space.png</file>
     </qresource>
     <qresource prefix="/new/prefix1">
         <file>Sprites/space.png</file>
+        <file>Sprites/idkw.jpg</file>
     </qresource>
 </RCC>

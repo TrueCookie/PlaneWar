@@ -1,5 +1,7 @@
 #include "score.h"
 #include <QFont>
+#include <QKeyEvent>
+#include <QDebug>
 
 Score::Score(QGraphicsItem *parent) : QGraphicsTextItem(parent){
     score = 0;
@@ -15,4 +17,11 @@ void Score::increase(){
 
 int Score::getScore(){
     return score;
+}
+
+void Score::keyPressEvent(QKeyEvent *event){
+    if(event->key() == Qt::Key_R){
+        qDebug() << "Restart is pressed";
+        emit restart();
+    }
 }

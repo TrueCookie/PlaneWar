@@ -20,7 +20,7 @@ Game::Game(QWidget *parent){
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setFixedSize(800, 600);
-    view->setBackgroundBrush(QBrush(QImage(":/new/prefix/Sprites/space.png")));
+    scene->setBackgroundBrush(QBrush(QImage(":/sprites/Sprites/space.png")));
     view->show();
 
     QMediaPlayer *music = new QMediaPlayer();
@@ -40,14 +40,18 @@ void Game::spawn(){
 }
 
 void Game::over(){
-    //scene->clear();
     scene->removeItem(health);
-    //scene->removeItem(player);
-    text = new QGraphicsTextItem("GAME OVER");
-    text->setScale(10.0);
-    text->setPos(64,scene->height()/3);
-    scene->addItem(text);
-    score->setPos(scene->width()/3,text->pos().y()+128);
+    scene->removeItem(player);
+    //score->setFocusPolicy(Qt::StrongFocus);
+    score->setFlag(QGraphicsItem::ItemIsFocusable);
+    score->setFocus();
+    connect(score, &Score::restart, this, &Game::restart);
+    gameoverText = new QGraphicsTextItem("GAME OVER");
+    gameoverText->setScale(10.0);
+    gameoverText->setDefaultTextColor(Qt::red);
+    gameoverText->setPos(64,scene->height()/3);
+    scene->addItem(gameoverText);
+    score->setPos(scene->width()/3,gameoverText->pos().y()+128);
     score->setScale(4.0);
 }
 
@@ -71,3 +75,5 @@ void Game::restart(){
     connect(player, &Player::yeah, score, &Score::increase);
     connect(health, &Health::zero, this, &Game::over);
 }
+
+

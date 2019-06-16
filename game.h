@@ -11,9 +11,10 @@ class Game : public QGraphicsView{
 private:
     const int screenWidth = 800;
     const int screenHeight = 600;
-    QGraphicsTextItem* text;
+    QGraphicsTextItem* gameoverText;
 public:
     Game(QWidget *parent = nullptr);
+    //void keyPressEvent(QKeyEvent *event);
     QGraphicsView *view;
     QTimer* timer;
     QMediaPlayer *music;

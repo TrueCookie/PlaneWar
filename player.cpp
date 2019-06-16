@@ -35,7 +35,7 @@ void Player::keyPressEvent(QKeyEvent *event){
         }else if(bang->state() == QMediaPlayer::StoppedState){
             bang->play();
         }
-    }else if(event->key() == Qt::Key_R){
+    }else if(event->key() == Qt::Key_O){
         qDebug() << "Enter is pressed";
         emit restart();
     }
