@@ -19,6 +19,7 @@ private:
     QMediaPlayer *bang;
 signals:
     void yeah();
+    void restart();
 };
 
 #endif // MYRECT_H

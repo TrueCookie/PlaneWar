@@ -8,7 +8,7 @@ Play::Play(){
     QTextCodec *codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(codec);
     game = new Game();
-    connect(game, &Game::restart, this, &Play::restart);
+    //connect(game, &Game::restart, this, &Play::restart);
 }
 
 void Play::restart(){

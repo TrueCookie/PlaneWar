@@ -11,19 +11,23 @@ class Game : public QGraphicsView{
 private:
     const int screenWidth = 800;
     const int screenHeight = 600;
+    QGraphicsTextItem* text;
 public:
     Game(QWidget *parent = nullptr);
     QGraphicsView *view;
     QTimer* timer;
     QMediaPlayer *music;
-    void spawn();
-    void over(QKeyEvent *event);
+
     QGraphicsScene *scene;
     Player *player;
     Score *score;
     Health *health;
-signals:
+public slots:
     void restart();
+    void spawn();
+    void over();
+//signals:
+    //void restart();
 };
 
 #endif // GAME_H

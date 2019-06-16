@@ -12,7 +12,6 @@ Player::Player(QGraphicsItem *parent) : QGraphicsPixmapItem (parent){
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
-    qDebug() << "key is pressed";
     if(event->key() == Qt::Key_Left){
         if(pos().x() > 0){
             setPos(x()-10, y());
@@ -26,18 +25,19 @@ void Player::keyPressEvent(QKeyEvent *event){
     }else if(event->key() == Qt::Key_Down){
         setPos(x(), y()+10);
     }else if(event->key() == Qt::Key_Space){
-        //create a bullet
+        qDebug() << "Space is pressed";
         Bullet *bullet = new Bullet();
         bullet->setPos(x()+50, y()+70);
         scene()->addItem(bullet);
         connect(bullet, &Bullet::hit, this, &Player::destroyed);
-
         if(bang->state() == QMediaPlayer::PlayingState){
             bang->setPosition(0);
         }else if(bang->state() == QMediaPlayer::StoppedState){
             bang->play();
         }
-        qDebug() << "Bullet created";
+    }else if(event->key() == Qt::Key_R){
+        qDebug() << "Enter is pressed";
+        emit restart();
     }
 }
 
