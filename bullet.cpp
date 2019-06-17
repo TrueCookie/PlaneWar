@@ -24,7 +24,6 @@ void Bullet::move(){
             emit hit();
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
-            //delete them both
             delete colliding_items[i];
             delete this;
             return;

@@ -13,6 +13,7 @@
 
 
 Game::Game(QWidget *parent){
+    Q_UNUSED(parent);
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,screenWidth,screenHeight);
 
@@ -42,7 +43,6 @@ void Game::spawn(){
 void Game::over(){
     scene->removeItem(health);
     scene->removeItem(player);
-    //score->setFocusPolicy(Qt::StrongFocus);
     score->setFlag(QGraphicsItem::ItemIsFocusable);
     score->setFocus();
     connect(score, &Score::restart, this, &Game::restart);
